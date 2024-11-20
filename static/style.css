@@ -1,0 +1,176 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(224, 209, 190);
+    background-size: cover;
+    color: rgb(3, 3, 3);  /* Ensure text is readable against the background */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: fixed;
+    height:  256px;
+    flex-direction: column;
+    background-color: #000000;
+    z-index: 10;
+}
+
+.top h1 {
+    color: #faf9ff;
+    font-family: cursive;
+    font-size: 40px;
+    z-index: 1;
+    word-spacing: 10px;
+    letter-spacing: 20px;
+    margin: 0px;
+    @media only screen and (max-width: 800px) {
+        text-align: center;
+        font-size: 20px;
+        word-spacing: 5px;
+        letter-spacing: 10px;
+    }
+}
+
+.search-container {
+    margin-top: 50px;
+    width: 50%;
+    max-width: 500px;
+    z-index: 1;
+    position: relative;
+    display: flex;
+    gap: 4px;
+    @media only screen and (max-width: 800px) {
+        width: 80%;
+    }
+}
+
+#song-name {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    padding-left: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+#suggestions {
+    text-align: left;
+}
+
+#song-name:focus {
+    border-color: #007BFF;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+    outline: none;
+}
+
+.search-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #094f99;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-container button:hover {
+    background-color: #0056b3;
+}
+
+.suggestions-container {
+    max-height: 200px;
+    overflow-y: auto;
+    border: none;
+    margin-top: 43px;
+    padding: 5px;
+    background-color: white;
+    position: absolute;
+    border-radius: 4px;
+    display: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.suggestions-container div {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.suggestions-container div:hover {
+    background-color: #f0f0f0;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;
+    gap: 5%;
+    @media only screen and (max-width: 800px) {
+        flex-direction: column;
+
+    }
+}
+
+.recommendations-column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+.recommendations-column h3 {
+    margin-bottom: 30px;
+    
+}
+
+.embedded-tracks-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.embedded-track {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searched-track {
+    width: 60%; /* Spans most of the page */
+    height: 5%; /* Thin height */
+    position: relative;
+    
+    display: flex; /* Use flexbox for centering content */
+    justify-content: center; /* Center content horizontally */
+    border-radius: 70px; /* Rounded corners */
+    
+}
+.searched-track2 {
+    margin-top: 266px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.suggestions-container div.focused {
+    background-color: #d3d3d3; /* Highlight color */
+    color: #000; /* Text color */
+}
+
+.main-container iframe{
+    height: 150px !important;
+}

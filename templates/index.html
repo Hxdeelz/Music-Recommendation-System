@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Recommendation System</title>
+    <link rel="stylesheet" href="../static/style.css" type="text/css" >
+</head>
+<body>
+    <div class="top">
+        <h1>Music Recommendation System</h1>
+        <div class="search-container">
+            <input type="text" id="song-name" placeholder="Enter song name" oninput="fetchSuggestions()">
+            <button onclick="getRecommendations()">Search</button>
+            <div id="suggestions" class="suggestions-container"></div>
+        </div>
+    </div>
+    <div id="searched-song-embedding" class="searched-track2"></div>
+    <div class="main-container">
+        <div class="recommendations-column">
+            <h3>KNN Recommendations:</h3>
+            <div id="knn-embedded-tracks" class="embedded-tracks-grid"></div>
+        </div>
+        <div class="recommendations-column">
+            <h3>Autoencoder Recommendations:</h3>
+            <div id="autoencoder-embedded-tracks" class="embedded-tracks-grid"></div>
+        </div>
+        <div class="recommendations-column">
+            <h3>Random Forest Recommendations:</h3>
+            <div id="rf-embedded-tracks" class="embedded-tracks-grid"></div>
+        </div>
+    </div>
+
+    <script src="../static/MIX.js"></script>
+</body>
