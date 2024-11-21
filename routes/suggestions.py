@@ -31,7 +31,7 @@ def suggestions():
             query, 
             combined_entries, 
             scorer=fuzz.partial_ratio, 
-            limit=20  # Adjust the number of results
+            limit=50  # Adjust the number of results
         )
 
         # Extract the top results
