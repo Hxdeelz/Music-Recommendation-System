@@ -9,18 +9,17 @@ from sklearn.metrics.pairwise import cosine_similarity
 from tensorflow import keras
 
 
-# Set environment variable to disable oneDNN optimizations if desired
-# os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
-
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 # Load data
-data = pd.read_csv("data/updated_dataset.csv")  
+data = pd.read_csv("data/updated_dataset.csv")
+
 # Define features to normalize
 features = ['duration_ms', 'year', 'acousticness', 'danceability', 'energy', 
             'instrumentalness', 'liveness', 'loudness', 'speechiness', 'tempo', 
             'valence', 'mode', 'key', 'popularity', 'explicit']
+
 
 # Standardize features
 scaler = StandardScaler()
@@ -48,10 +47,8 @@ def get_knn_recommendations(song_row, top_n=5):
 # Load the encoder model
 encoder = keras.models.load_model("data/updated_encoder_model.h5", compile=False)
 
-# Compile the encoder model (if needed)
-# encoder.compile(optimizer='adam', loss='mse')
 
-# Generate song embeddings
+# # Generate song embeddings
 song_embeddings = encoder.predict(data[features])
 
 def get_autoencoder_recommendations(song_row, top_n=5):
@@ -119,72 +116,3 @@ def generate_recommendation_list(song_row, top_n=5):
     })
 
 
-# @app.route('/')
-# def home():
-#     with open('index.html', 'r') as file:
-#         index_html = file.read()
-#     return render_template_string(index_html)
-
-# @app.route('/style.css')
-# def css():
-#     return send_from_directory('.', 'style.css')
-
-# @app.route('/recommend', methods=['POST'])
-# def recommend():
-#     try:
-#         request_data = request.get_json()
-#         song_name = request_data.get('song')  # Get the 'song' key from the request JSON
-#         artist_name = request_data.get('artist')  # Get the 'artist' key from the request JSON
-
-#         # Ensure the song name and artist exist in the dataset
-#         song_row = data[(data['name'] == song_name) & (data['artists'] == artist_name)]
-#         if song_row.empty:
-#             return jsonify({"error": "Song by specified artist not found"}), 404
-
-#         # Generate the searched song embedding
-#         searched_song_embedding = song_row['embed_track'].values[0]
-
-#         # Generate recommendations
-#         recommendations_df = generate_recommendation_list(song_row,top_n=5)
-
-#         # Structure the response
-#         recommendations = {
-#             'searched_song_code': searched_song_embedding,
-#             'KNN': recommendations_df['KNN'].dropna().tolist(),
-#             'KNN_Code': recommendations_df['KNN_Code'].dropna().tolist(),
-#             'Autoencoder': recommendations_df['Autoencoder'].dropna().tolist(),
-#             'Autoencoder_Code': recommendations_df['Autoencoder_Code'].dropna().tolist(),
-#             'RandomForest': recommendations_df['RandomForest'].dropna().tolist(),
-#             'RandomForest_Code': recommendations_df['RandomForest_Code'].dropna().tolist()
-#         }
-
-#         print(f"Recommendations: {recommendations}")
-#         return jsonify(recommendations)
-#     except Exception as e:
-#         print("Error occurred: ", e)
-#         print(traceback.format_exc())
-#         return jsonify({"error": str(e)}), 500
-
-
-# @app.route('/suggestions', methods=['GET'])
-# def suggestions():
-#     query = request.args.get('query', '').strip().lower()
-
-#     # Search for matches in either song name or any artist in the 'artists' list
-#     results = data[
-#         data['name'].str.contains(query, case=False) | 
-#         data['artists'].apply(lambda artists: any(query in artist.lower() for artist in artists) if isinstance(artists, list) else query in artists.lower())
-#     ][['name', 'artists']].head(30)
-    
-#     # Format the suggestions as "song name by artist name(s)"
-#     suggestions = results.apply(
-#         lambda row: f"{row['name']} by {', '.join(row['artists'])}" if isinstance(row['artists'], list)
-#         else f"{row['name']} by {row['artists']}", axis=1
-#     ).tolist()
-    
-#     return jsonify(suggestions)
-
-
-
-# if __name__ == "__main__":
-#     app.run(debug=False, port=5000)

@@ -12,7 +12,7 @@ CORS(app)
 app.register_blueprint(suggestions_bp)
 app.register_blueprint(recommendations_bp)
 
-app.template_folder = path.join('..', 'templates')
+app.template_folder = path.join('templates')
 
 @app.route('/')
 def home():
