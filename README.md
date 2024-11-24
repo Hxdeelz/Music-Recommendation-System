@@ -11,7 +11,7 @@ This project uses multiple algorithms to generate song recommendations, with an 
 ---
 
 ## How to run the project
-    - run the app.py file
+    - run the app.py file with the command "python app.py" 
     - after running it you'll see the pre traind encoder model being loading 
     - after a few sec you will get the link to the website, follow link
     - after that you will be taken to the user interface where you will see a search box
